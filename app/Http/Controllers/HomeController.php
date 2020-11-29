@@ -9,6 +9,6 @@ class HomeController extends Controller
 
 
     public function getHome() {
-        return view('home');
+        return redirect()->action('App\Http\Controllers\ProductoController@getIndex');
     }
 }

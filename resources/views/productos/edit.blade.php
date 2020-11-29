@@ -2,6 +2,41 @@
 
 @section('content')
 
-Modificar producto {{ $id }}
+<div class="row" style="margin-top:40px">
+    <div class="offset-md-3 col-md-6">
+       <div class="card">
+          <div class="card-header text-center">
+             Modificar producto
+          </div>
+          <div class="card-body" style="padding:30px">
+
+             <form action="{{ url('/productos/edit') }}" method="POST">
+                 {{method_field('PUT')}}
+
+                 @csrf
+
+                 <div class="form-group">
+                    <label for="title">proucto</label>
+                    <input type="text" name="product" id="title" class="form-control">
+                 </div>
+
+                 <div class="form-group">
+                     <label for="title">Categoria</label>
+                    <input type="text" name="cate" id="cate">
+                 </div>
+
+
+                 <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
+                        Modificar producto
+                    </button>
+                 </div>
+
+             </form>
+
+          </div>
+       </div>
+    </div>
+ </div>
 
 @stop
