@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-
-    public function getHome() {
-        return redirect()->action('App\Http\Controllers\ProductoController@getIndex');
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return redirect('/productos'); //Hago aqui la redireccion
     }
 }

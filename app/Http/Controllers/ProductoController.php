@@ -4,22 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+
 class ProductoController extends Controller
 {
-
-
     public function getIndex(){
         return view('productos.index', array('arrayProductos' => Producto::all()));
-        // TODO cambiar el array por acceso a la base de datos
     }
+
     public function getShow($id){
-        return view('productos.show', array('producto'=> Producto::findOrFail($id)));
+        return view('productos.show', array('producto' => Producto::findOrFail($id)));
     }
+
     public function getCreate(){
         return view('productos.create');
     }
+
     public function getEdit($id){
-        return view('productos.edit', array('producto'=>Producto::findOrFail()));
+        return view('productos.edit', array('producto' => Producto::findOrFail($id)));
     }
+
+    public function postCreate(Request $request){
+
+        $producto = new Producto();
+
+
+        $producto->nombre = $request->input('nombre');
+        $producto->precio = $request->input('precio');
+        $producto->categoria = $request->input('categoria');
+        $producto->imagen = $request->input('imagen');
+        $producto->descripcion = $request->input('categoria');
+        $producto->save();
+
+
+        return redirect('/productos');
+
+    }
+
+    public function putEdit(Request $request){
+
+
+        $id = $request->input('id');
+
+        $producto = Producto::findOrFail($id);
+        $producto->nombre = $request->input('nombre');
+        $producto->precio = $request->input('precio');
+        $producto->categoria = $request->input('categoria');
+        $producto->imagen = $request->input('imagen');
+        $producto->descripcion = $request->input('categoria');
+        $producto->save();
+
+
+        return redirect('/productos/show/'.$id);
+    }
+
 
 }
